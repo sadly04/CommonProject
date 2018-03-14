@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 3270154855
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: baaab9ef3750e0d917b83046f9fb2088
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c73412a662fd4e4f36af34cbdf078b85
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/Common/Texture/cangying.png
+- Assets/AssetBundles/Common/Model/bianbian.png
+Dependencies: []

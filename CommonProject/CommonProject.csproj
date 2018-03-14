@@ -285,9 +285,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\AssetBundleLoad.cs" />
-    <Compile Include="Assets\Script\AssetBundleModification.cs" />
-    <Compile Include="Assets\Script\AssetBundlePack.cs" />
+    <Compile Include="Assets\Script\AssetBundle\AssetBundleLoad.cs" />
+    <Compile Include="Assets\Script\AssetBundle\AssetBundleManager.cs" />
+    <Compile Include="Assets\Script\AssetBundle\AssetBundleModification.cs" />
+    <Compile Include="Assets\Script\AssetBundle\AssetBundlePack.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

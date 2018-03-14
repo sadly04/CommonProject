@@ -32,11 +32,37 @@ namespace sdy.AssetBundleManager
 
 #elif UNITY_EDITOR
 
+            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
+                 WindowsDirectory + bundleLocalPath;
+
+#endif
+            Debug.Log(Application.streamingAssetsPath);
+
+            return AssetBundle.LoadFromFileAsync(fullPath);
+
+        }
+
+
+        public static AssetBundle LoadAssetFromStreamingAssets(string bundleLocalPath)
+        {
+
+            string fullPath = "";
+
+#if !UNITY_EDITOR && UNITY_ANDROID
+
+            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AndroidDirectory + "/" + bundleLocalPath;
+
+#elif !UNITY_EDITOR && UNITY_IOS
+
+            fullPath = Application.dataPath + "/Raw/" + iOSDirectory + "/" + bundleLocalPath;
+
+#elif UNITY_EDITOR
+
             fullPath = System.IO.Path.Combine(Application.streamingAssetsPath,
                 System.IO.Path.Combine(WindowsDirectory, bundleLocalPath));
 
 #endif
-            return AssetBundle.LoadFromFileAsync(fullPath);
+            return AssetBundle.LoadFromFile(fullPath);
 
         }
 
