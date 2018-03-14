@@ -1,34 +1,37 @@
-﻿using System.Collections;
+﻿
+
+#if UNITY_EDITOR
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEditor;
 using System.IO;
 
-#if UNITY_EDITOR
-
-namespace USDY
+namespace sdy.AssetBundleManager
 {
 
-    /// <summary>
-    /// AssetBundleMangager类为修改批量修改AssetBundle的Name与Variant的编辑器窗口
-    /// </summary>
-    public class AssetBundleManager : EditorWindow
-    {
 
+    /// <summary>
+    /// 批量修改AssetBundle的Name与Variant的编辑器窗口
+    /// </summary>
+    public class AssetBundleModification : EditorWindow
+    {
 
         [MenuItem("AssetsManager/批量修改AssetBundle")]
         static void AddWindow()
         {
             //创建窗口
-            AssetBundleManager window = (AssetBundleManager)EditorWindow.GetWindow(
-                typeof(AssetBundleManager), false, "批量修改AssetBundle");
+            AssetBundleModification window = (AssetBundleModification)EditorWindow.GetWindow
+                (typeof(AssetBundleModification), false, "批量修改AssetBundle");
             window.Show();
 
         }
 
         //输入文字的内容
-        private string Path = "Assets/Resources/", AssetBundleName = "", Variant = "";
+        private string Path = "Assets/AssetBundles/", AssetBundleName = "", Variant = "";
         private bool IsThisName = true;
 
         void OnGUI()
@@ -91,6 +94,7 @@ namespace USDY
                 EditorUtility.FocusProjectWindow();
             }
         }
+
         /// <summary>
         /// 此函数用来修改AssetBundleName与Variant
         /// </summary>
@@ -144,5 +148,8 @@ namespace USDY
     }
 
 }
+
+
+
 
 #endif
