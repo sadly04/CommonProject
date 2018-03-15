@@ -19,8 +19,8 @@ namespace sdy.AssetBundleManager
         // Use this for initialization
         IEnumerator Start()
         {
-            //AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("/main");
-            AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsStaeamAsync("/main");
+            AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("/main");
+            //AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsStaeamAsync("/main");
             yield return abrq;
             MainAB = abrq.assetBundle;
 
@@ -29,11 +29,6 @@ namespace sdy.AssetBundleManager
             Tex1 = abq.asset as Texture;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 
 }

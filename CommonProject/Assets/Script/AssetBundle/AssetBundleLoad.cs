@@ -68,35 +68,34 @@ namespace sdy.AssetBundleManager
 
         }
 
-
         /// <summary>
         /// 通过stream读取assetbundle
         /// </summary>
         /// <param name="bundleLocalPath"></param>
         /// <returns></returns>
-        public static AssetBundleCreateRequest LoadAssetFromStreamingAssetsStaeamAsync(string bundleLocalPath)
-        {
+//        public static AssetBundleCreateRequest LoadAssetFromStreamingAssetsStaeamAsync(string bundleLocalPath)
+//        {
 
-            string fullPath = "";
+//            string fullPath = "";
 
-#if !UNITY_EDITOR && UNITY_ANDROID
+//#if !UNITY_EDITOR && UNITY_ANDROID
 
-            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AndroidDirectory + "/" + bundleLocalPath;
+//            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AndroidDirectory + "/" + bundleLocalPath;
 
-#elif !UNITY_EDITOR && UNITY_IOS
+//#elif !UNITY_EDITOR && UNITY_IOS
 
-            fullPath = Application.dataPath + "/Raw/" + iOSDirectory + "/" + bundleLocalPath;
+//            fullPath = Application.dataPath + "/Raw/" + iOSDirectory + "/" + bundleLocalPath;
 
-#elif UNITY_EDITOR
+//#elif UNITY_EDITOR
 
-            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
-                 WindowsDirectory + bundleLocalPath;
+//            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
+//                 WindowsDirectory + bundleLocalPath;
 
-#endif
+//#endif
 
-            StreamReader sr = new StreamReader(fullPath);
-            return AssetBundle.LoadFromStreamAsync(sr.BaseStream);
-        }
+//            StreamReader sr = new StreamReader(fullPath);
+//            return AssetBundle.LoadFromStreamAsync(sr.BaseStream);
+//        }
 
     }
 
