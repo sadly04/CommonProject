@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.IO;
+
 
 namespace sdy.AssetBundleManager
 {
@@ -64,6 +66,36 @@ namespace sdy.AssetBundleManager
 #endif
             return AssetBundle.LoadFromFile(fullPath);
 
+        }
+
+
+        /// <summary>
+        /// 通过stream读取assetbundle
+        /// </summary>
+        /// <param name="bundleLocalPath"></param>
+        /// <returns></returns>
+        public static AssetBundleCreateRequest LoadAssetFromStreamingAssetsStaeamAsync(string bundleLocalPath)
+        {
+
+            string fullPath = "";
+
+#if !UNITY_EDITOR && UNITY_ANDROID
+
+            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AndroidDirectory + "/" + bundleLocalPath;
+
+#elif !UNITY_EDITOR && UNITY_IOS
+
+            fullPath = Application.dataPath + "/Raw/" + iOSDirectory + "/" + bundleLocalPath;
+
+#elif UNITY_EDITOR
+
+            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
+                 WindowsDirectory + bundleLocalPath;
+
+#endif
+
+            StreamReader sr = new StreamReader(fullPath);
+            return AssetBundle.LoadFromStreamAsync(sr.BaseStream);
         }
 
     }

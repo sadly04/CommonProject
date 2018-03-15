@@ -19,7 +19,8 @@ namespace sdy.AssetBundleManager
         // Use this for initialization
         IEnumerator Start()
         {
-            AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("/main");
+            //AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("/main");
+            AssetBundleCreateRequest abrq = AssetBundleLoad.LoadAssetFromStreamingAssetsStaeamAsync("/main");
             yield return abrq;
             MainAB = abrq.assetBundle;
 
