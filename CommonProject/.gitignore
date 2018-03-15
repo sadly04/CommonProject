@@ -1,15 +1,10 @@
-# =============== #
-# Unity generated #
-# =============== #
-Temp/
-Library/
+
+/Temp
+/Library
 *.apk
 *.log
 *.ipa
 
-# ===================================== #
-# Visual Studio / MonoDevelop generated #
-# ===================================== #
 ExportedObj/
 obj/
 *.svd

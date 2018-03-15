@@ -289,6 +289,9 @@
     <Compile Include="Assets\Script\AssetBundle\AssetBundleManager.cs" />
     <Compile Include="Assets\Script\AssetBundle\AssetBundleModification.cs" />
     <Compile Include="Assets\Script\AssetBundle\AssetBundlePack.cs" />
+    <Compile Include="Assets\Script\Pool\ReusePool.cs" />
+    <Compile Include="Assets\Script\Pool\ReusePoolSingleton.cs" />
+    <Compile Include="Assets\Script\Pool\TestPool.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
