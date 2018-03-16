@@ -19,6 +19,8 @@ namespace sdy.AssetBundleManager
         public static string IOSDirectory = "/IOS";
 
 
+        public byte[] b;
+
         public static AssetBundleCreateRequest LoadAssetFromStreamingAssetsAsync(string bundleLocalPath)
         {
 
@@ -97,6 +99,18 @@ namespace sdy.AssetBundleManager
 //            return AssetBundle.LoadFromStreamAsync(sr.BaseStream);
 //        }
 
+
+        public IEnumerator LoadAssetBundleFormServer()
+        {
+            WWW www = new WWW("http://420099788@qq.com");
+            yield return www;
+
+            if (www.error == null)
+            {
+                b = www.bytes;
+                Debug.Log(www.bytes);
+            }
+        }
     }
 
 }

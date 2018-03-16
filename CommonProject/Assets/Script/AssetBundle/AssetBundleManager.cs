@@ -14,7 +14,7 @@ namespace sdy.AssetBundleManager
         AssetBundle MainAB;
 
         public Texture Tex1;
-        Texture Tex2;
+        public Texture Tex2;
 
         // Use this for initialization
         IEnumerator Start()
@@ -27,6 +27,12 @@ namespace sdy.AssetBundleManager
             AssetBundleRequest abq = MainAB.LoadAssetAsync("bianbian");
             yield return abq;
             Tex1 = abq.asset as Texture;
+
+
+            AssetBundleRequest abq1 = MainAB.LoadAssetAsync("cangying");
+            yield return abq1;
+            Tex2 = abq1.asset as Texture;
+            //StartCoroutine(GetComponent<AssetBundleLoad>().LoadAssetBundleFormServer());
         }
 
     }
