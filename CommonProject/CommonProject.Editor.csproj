@@ -297,7 +297,10 @@
     <Compile Include="Assets\XLua\Src\Editor\TemplateRef.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AssetBundles\Common\Model\hotfix.lua.txt" />
+    <None Include="Assets\Resources\change.lua.txt" />
     <None Include="Assets\Resources\hotfix.lua.txt" />
+    <None Include="Assets\Script\XLuaCS\TestLuaScript.txt" />
     <None Include="Assets\XLua\CHANGELOG.txt" />
     <None Include="Assets\XLua\Examples\02_U3DScripting\LuaTestScript.lua.txt" />
     <None Include="Assets\XLua\Examples\03_UIEvent\ButtonInteraction.lua.txt" />
@@ -305,6 +308,8 @@
     <None Include="Assets\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
     <None Include="Assets\XLua\Examples\07_AsyncTest\Resources\async_test.lua.txt" />
     <None Include="Assets\XLua\Examples\07_AsyncTest\Resources\message_box.lua.txt" />
+    <None Include="Assets\XLua\Gen\Resources\hotfix_id_map.lua.txt" />
+    <None Include="Assets\XLua\Gen\link.xml" />
     <None Include="Assets\XLua\Resources\perf\memory.lua.txt" />
     <None Include="Assets\XLua\Resources\perf\profiler.lua.txt" />
     <None Include="Assets\XLua\Resources\tdr\tdr.lua.txt" />
