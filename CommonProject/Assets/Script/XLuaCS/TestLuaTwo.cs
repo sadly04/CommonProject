@@ -13,17 +13,22 @@ namespace sdy.Lua
     public class TestLuaTwo : MonoBehaviour
     {
         LuaEnv luaenv = new LuaEnv();
+        public int num = 0;
+        public string textvalue = null;
 
         // Use this for initialization
         IEnumerator Start()
         {
-            AssetBundleCreateRequest abcr = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("/common");
+            yield return null;
+
+            AssetBundleCreateRequest abcr = AssetBundleLoad.LoadAssetFromStreamingAssetsAsync("common");
             yield return abcr;
             AssetBundle common = abcr.assetBundle;
 
             AssetBundleRequest abr = common.LoadAssetAsync("hotfix.lua");
             yield return abr;
             TextAsset text = abr.asset as TextAsset;
+            textvalue = text.text;
 
             luaenv.DoString(text.text);
 
@@ -33,9 +38,14 @@ namespace sdy.Lua
             //    end)  
             //");
 
+            //luaenv.DoString(@"require 'hotfix'");
 
-            int num = Add(2, 1);
-            print(num);
+            //TestTableValue table = luaenv.Global.Get<TestTableValue>("tablevalue");
+
+            //Debug.Log(table.name + table.age + table.description);
+
+            //int num = Add(2, 1);
+            //print(num);
         }
 
         // Update is called once per frame
@@ -63,7 +73,7 @@ namespace sdy.Lua
                 //Debug.Log(Application.dataPath);
 
 
-                luaenv.DoString(@"require 'hotfix'");
+                //luaenv.DoString(@"require 'hotfix'");
 
                 //luaenv.DoString(@"  
                 //    xlua.hotfix(CS.sdy.Lua.TestLuaTwo, 'Add', function(self, a, b)  
@@ -72,11 +82,15 @@ namespace sdy.Lua
                 //");
 
 
-                int num = Add(2, 1);
+                num = Add(2, 1);
                 print(num);
+
+                
 
                 //luaenv.Dispose();
             }
+
+            GUI.TextField(new Rect(310, 100, 300, 150), num.ToString());
         }
 
 
@@ -85,6 +99,14 @@ namespace sdy.Lua
         {
             //luaenv.Dispose();
         }
+    }
+
+
+    public class TestTableValue
+    {
+        public string name;
+        public string age;
+        public string description;
     }
 
 }

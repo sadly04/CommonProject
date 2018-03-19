@@ -499,8 +499,8 @@ namespace XLua.CSObjectWrap
                 
                 {
                     
-                        UnityEngine.MovieTexture __cl_gen_ret = __cl_gen_to_be_invoked.GetMovieTexture(  );
-                        translator.Push(L, __cl_gen_ret);
+                        //UnityEngine.MovieTexture __cl_gen_ret = __cl_gen_to_be_invoked.GetMovieTexture(  );
+                        //translator.Push(L, __cl_gen_ret);
                     
                     
                     

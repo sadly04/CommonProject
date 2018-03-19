@@ -13,10 +13,10 @@ namespace sdy.AssetBundleManager
     {
 
         public static string StreamingAssetDirectory = "Assets/StreamingAssets/";
-        public static string AssetBundleDirectory = "AssetBundles";
-        public static string WindowsDirectory = "/Windows";
-        public static string AndroidDirectory = "/Android";
-        public static string IOSDirectory = "/IOS";
+        public static string AssetBundleDirectory = "AssetBundles/";
+        public static string WindowsDirectory = "Windows";
+        public static string AndroidDirectory = "Android";
+        public static string IOSDirectory = "IOS";
 
 
         public byte[] b;
@@ -28,19 +28,21 @@ namespace sdy.AssetBundleManager
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 
-            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AndroidDirectory + "/" + bundleLocalPath;
+            fullPath = "jar:file://" + Application.dataPath + "!/assets/" + AssetBundleDirectory
+            + AndroidDirectory + "/" + bundleLocalPath;
 
 #elif !UNITY_EDITOR && UNITY_IOS
 
-            fullPath = Application.dataPath + "/Raw/" + iOSDirectory + "/" + bundleLocalPath;
+            fullPath = Application.dataPath + "/Raw/" + AssetBundleDirectory
+            + iOSDirectory + "/" + bundleLocalPath;
 
 #elif UNITY_EDITOR
 
-            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
-                 WindowsDirectory + bundleLocalPath;
+            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory + "/" +
+                 WindowsDirectory + "/" + bundleLocalPath;
 
 #endif
-            Debug.Log(Application.streamingAssetsPath);
+            Debug.Log(fullPath);
 
             return AssetBundle.LoadFromFileAsync(fullPath);
 
