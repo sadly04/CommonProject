@@ -9,6 +9,7 @@ using UnityEngine;
 
 using UnityEditor;
 using System.IO;
+using System.Text;
 
 namespace sdy.AssetBundleManager
 {
@@ -31,8 +32,9 @@ namespace sdy.AssetBundleManager
         }
 
         //输入文字的内容
-        private string Path = "Assets/AssetBundles/", AssetBundleName = "", Variant = "";
+        private string Path = "Assets/AssetBundles/", AssetBundleName = "", Variant = "", Version = "";
         private bool IsThisName = true;
+        private bool IsThisVersion = true;
 
         void OnGUI()
         {
@@ -73,6 +75,24 @@ namespace sdy.AssetBundleManager
             if (GUILayout.Button("清空所有AssetName及Variant"))
             {
                 ClearAssetBundlesName();
+            }
+
+            //EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("使用默认版本号", GUILayout.MinWidth(120));
+            IsThisVersion = EditorGUILayout.Toggle(IsThisVersion);
+            //EditorGUILayout.EndHorizontal();
+
+            //EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("版本号:", GUILayout.MinWidth(120));
+            if (IsThisVersion)
+                GUILayout.Label("1.0", GUILayout.MinWidth(120));
+            else
+                Version = EditorGUILayout.TextField(Version.ToLower());
+            //EditorGUILayout.EndHorizontal();
+
+            if (GUILayout.Button("生成配置文件"))
+            {
+                BuildVersionTxt();
             }
         }
 
@@ -141,7 +161,64 @@ namespace sdy.AssetBundleManager
             }
         }
 
-        void OnInspectorUpdate()
+        void BuildVersionTxt()
+        {
+            BuildVersion(Application.dataPath + "/AssetBundles/Test");
+        }
+
+        static void BuildVersion(string path)
+        {
+            // 获取Res文件夹下所有文件的相对路径和MD5值  
+            string[] files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+            StringBuilder versions = new StringBuilder();
+            for (int i = 0; i < files.Length; i++)
+            {
+                string filePath = files[i];
+                string extension = filePath.Substring(files[i].LastIndexOf("."));
+                if (extension != ".meta")
+                {
+                    string relativePath = filePath.Replace(path, "").Replace("\\", "/");
+                    string md5 = CalculateMD5(filePath);
+                    versions.Append(relativePath).Append(",").Append(md5).Append("\n");
+                }
+            }
+            // 生成配置文件  
+            string vpath = Application.dataPath + "/AssetBundles/version.txt";
+            FileStream stream = new FileStream(vpath, FileMode.Create);
+            byte[] data = Encoding.UTF8.GetBytes(versions.ToString());
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+            stream.Close();
+        }
+
+
+
+        static string CalculateMD5(string filePath)
+        {
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 =
+                    new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(fs);
+                fs.Close();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+
+                return sb.ToString();
+            }
+            catch (System.Exception ex)
+            {
+                throw new System.Exception("md5file() fail, error:" + ex.Message);
+            }
+        }
+
+
+
+            void OnInspectorUpdate()
         {
             this.Repaint();//窗口的重绘
         }

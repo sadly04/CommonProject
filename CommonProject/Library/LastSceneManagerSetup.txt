@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/SceneXLua.unity
+- path: Assets/Script/XLuaCS/SceneXLua.unity
   isLoaded: 1
   isActive: 1

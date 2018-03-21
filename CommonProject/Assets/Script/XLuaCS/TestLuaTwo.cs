@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 using XLua;
 using sdy.AssetBundleManager;
@@ -30,7 +31,83 @@ namespace sdy.Lua
             TextAsset text = abr.asset as TextAsset;
             textvalue = text.text;
 
-            luaenv.DoString(text.text);
+            common.Unload(true);
+
+            //AssetBundleCreateRequest abcr1 = AssetBundle.LoadFromFileAsync(
+            //    Application.persistentDataPath + "common");
+
+            string rwp = Application.persistentDataPath + "/common.txt";
+            //Debug.Log(rwp);
+            //Debug.Log(Application.dataPath);
+
+            //if (!File.Exists(rwp))
+            //{
+            //    //File.Create(rwp + ".txt");
+            //    File.WriteAllText(rwp + ".txt", text.text);
+            //}
+
+            if(File.Exists(rwp))
+            {
+                Debug.Log("文件存在");
+                File.Delete(rwp);
+            }
+
+
+            if (File.Exists(rwp))
+            {
+                Debug.Log("删除失败");
+            }
+            else
+            {
+                Debug.Log("删除成功");
+            }
+
+
+            //if (!File.Exists(Application.persistentDataPath + "/common"))
+            //{
+            //    Debug.Log("存在ab包");
+            //    File.Copy("G:/CommonProject/CommonProject/Assets/StreamingAssets/AssetBundles/Windows/common",
+            //        Application.persistentDataPath + "/common");
+            //}
+
+            if (!Directory.Exists(Application.persistentDataPath + "/AssetBundles"))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/AssetBundles");
+            }
+
+            if (!File.Exists(Application.persistentDataPath + "/common"))
+            {
+                WWW www = new WWW("G:/CommonProject/CommonProject/Assets/StreamingAssets/AssetBundles/Windows/common");
+                yield return www;
+                if (string.IsNullOrEmpty(www.error))
+                {
+                    FileStream stream = File.Create(Application.persistentDataPath + "/common");
+                    stream.Write(www.bytes, 0, www.bytes.Length);
+                    stream.Flush();
+                    stream.Close();
+                }
+            }
+
+            AssetBundleCreateRequest abcr1 = AssetBundle.LoadFromFileAsync(Application.persistentDataPath + "/common");
+            yield return abcr1;
+
+            AssetBundle common1 = abcr1.assetBundle;
+
+            AssetBundleRequest abr1 = common1.LoadAssetAsync("hotfix.lua");
+            yield return abr1;
+
+            TextAsset txt = abr1.asset as TextAsset;
+            Debug.Log(txt.text);
+
+            //Debug.Log(File.ReadAllText(rwp + ".txt"));
+
+            //StreamReader read = new StreamReader(rwp + ".txt");
+            //string s = read.ReadToEnd();
+            //Debug.Log(s);
+
+
+
+            //luaenv.DoString(@"");
 
             //luaenv.DoString(@"  
             //    xlua.hotfix(CS.sdy.Lua.TestLuaTwo, 'Add', function(self, a, b)  

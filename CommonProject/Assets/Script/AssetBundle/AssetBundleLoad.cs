@@ -38,11 +38,11 @@ namespace sdy.AssetBundleManager
 
 #elif UNITY_EDITOR
 
-            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory + "/" +
+            fullPath = Application.streamingAssetsPath + "/" + AssetBundleDirectory +
                  WindowsDirectory + "/" + bundleLocalPath;
 
 #endif
-            Debug.Log(fullPath);
+            //Debug.Log(fullPath);
 
             return AssetBundle.LoadFromFileAsync(fullPath);
 
