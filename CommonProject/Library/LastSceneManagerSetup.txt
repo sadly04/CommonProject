@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/_Script/HotFix/SceneHotFix.unity
-  isLoaded: 1
-  isActive: 1
