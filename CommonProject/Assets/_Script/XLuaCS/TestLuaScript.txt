@@ -1,0 +1,9 @@
+local scale
+
+function start()
+    print("kaishi ceshi")
+	scale = object:GetComponent(typeof(CS.UnityEngine.Transform))
+	scale.localScale = CS.UnityEngine.Vector3(5, 5, 5)
+end
+
+

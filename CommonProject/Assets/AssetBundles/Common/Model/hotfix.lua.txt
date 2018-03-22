@@ -1,3 +1,0 @@
-xlua.hotfix(CS.sdy.Lua.TestLuaTwo, 'Add', function(self, a, b)
-    return a + b
-end)

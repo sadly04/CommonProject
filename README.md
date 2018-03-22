@@ -1,5 +1,7 @@
 # CommonProject
 
-Unity学习用项目
-1.AssetBundle使用
-2.复用池
+Unity Learn Item
+
+1.AssetBundle Use
+2.Reuse Pool
+3.XLua
