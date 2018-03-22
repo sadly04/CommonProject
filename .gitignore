@@ -1,6 +1,6 @@
-
-/Temp
-/Library
+﻿
+/CommonProject/Temp
+/CommonProject/Library
 *.apk
 *.log
 *.ipa
