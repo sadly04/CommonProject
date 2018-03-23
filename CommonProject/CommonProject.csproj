@@ -402,8 +402,10 @@
     <Compile Include="Assets\XLua\Tutorial\LuaCallCSharp\LuaCallCs.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\LocalResources\version.txt" />
     <None Include="Assets\Resources\change.lua.txt" />
     <None Include="Assets\Resources\hotfix.lua.txt" />
+    <None Include="Assets\ServerResources\version.txt" />
     <None Include="Assets\XLua\CHANGELOG.txt" />
     <None Include="Assets\XLua\Examples\02_U3DScripting\LuaTestScript.lua.txt" />
     <None Include="Assets\XLua\Examples\03_UIEvent\ButtonInteraction.lua.txt" />
@@ -432,6 +434,7 @@
     <None Include="Assets\XLua\Src\Editor\Template\TemplateCommon.lua.txt" />
     <None Include="Assets\XLua\Tutorial\LoadLuaScript\ByFile\Resources\byfile.lua.txt" />
     <None Include="Assets\_Script\XLuaCS\TestLuaScript.txt" />
+    <None Include="Assets\_Shader\hotfix.lua.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

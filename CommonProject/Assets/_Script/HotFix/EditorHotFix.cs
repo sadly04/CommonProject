@@ -7,6 +7,7 @@ using UnityEngine;
 
 using UnityEditor;
 using System.IO;
+using System.Text;
 
 namespace sdy.HotFix
 {
@@ -26,7 +27,6 @@ namespace sdy.HotFix
         private string assetBundleName = "";
         private string variantName = "";
         private string folderPath = "";
-        private string versionSavePath = "";
 
 
         private void OnGUI()
@@ -63,12 +63,6 @@ namespace sdy.HotFix
             folderPath = EditorGUILayout.TextField(folderPath);
             EditorGUILayout.EndHorizontal();
 
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("选择配置文件存储路径", GUILayout.MinWidth(60));
-            if (GUILayout.Button("浏览", GUILayout.MinWidth((60)))) { OpenSavePathFolder(); }
-            versionSavePath = EditorGUILayout.TextField(versionSavePath);
-            EditorGUILayout.EndHorizontal();
-
             GUILayout.Label("\n");
 
             if (GUILayout.Button("修改该文件夹下的AssetName和Variant")) { SetSettings(); }
@@ -78,13 +72,8 @@ namespace sdy.HotFix
             if (GUILayout.Button("在该文件夹下生成AssetBundle包(Android)")) { BuildAssetBundleForAndroid(); }
             if (GUILayout.Button("在该文件夹下生成AssetBundle包(IOS)")) { BuildAssetBundleForIOS(); }
             if (GUILayout.Button("在该文件夹下生成AssetBundle包(Window)")) { BuildAssetBundleForWindows(); }
-            //if (GUILayout.Button("在该文件夹下生成AssetBundle包(全平台)"))
-            //{
-            //    BuildAssetBundleForAndroid();
-            //    BuildAssetBundleForIOS();
-            //    BuildAssetBundleForWindows();
-            //}
-            if (GUILayout.Button("在该文件夹下生成AB包的配置文件")) { }
+
+            if (GUILayout.Button("在该文件夹下生成AB包的配置文件")) { BuildVersion(); }
         }
 
 
@@ -190,22 +179,65 @@ namespace sdy.HotFix
         }
 
 
-        /// <summary>
-        /// 此函数用来打开文件夹修改路径
-        /// </summary>
-        void OpenSavePathFolder()
+
+        void BuildVersion()
         {
-            string m_path = EditorUtility.OpenFolderPanel("选择文件夹", "", "");
-            if (!m_path.Contains(Application.dataPath))
+            string path = Application.dataPath + "/StreamingAssets/AssetBundles/";
+
+            // 获取文件夹下所有文件的相对路径和MD5值  
+            string[] files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+            StringBuilder versions = new StringBuilder();
+            for (int i = 0; i < files.Length; i++)
             {
-                Debug.LogError("路径应在当前工程目录下");
-                return;
+                string filePath = files[i];
+                string extension = null;
+                if (filePath.Contains("."))
+                {
+                    extension = filePath.Substring(files[i].LastIndexOf("."));
+                }
+                if (extension != ".meta")
+                {
+                    string relativePath = filePath.Replace(path, "").Replace("\\", "/");
+                    string md5 = CalculateMD5(filePath);
+                    versions.Append(relativePath).Append(",").Append(md5).Append("\n");
+                }
             }
-            if (m_path.Length != 0)
+            // 生成配置文件  
+            string vpath = folderPath + "version.txt";
+            FileStream stream = new FileStream(vpath, FileMode.Create);
+            byte[] data = Encoding.UTF8.GetBytes(versions.ToString());
+            stream.Write(data, 0, data.Length);
+            stream.Flush();
+            stream.Close();
+        }
+
+
+
+        /// <summary>
+        /// 计算路径下文件的md5值
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        static string CalculateMD5(string filePath)
+        {
+            try
             {
-                int firstindex = m_path.IndexOf("Assets");
-                versionSavePath = m_path.Substring(firstindex) + "/";
-                EditorUtility.FocusProjectWindow();
+                FileStream fs = new FileStream(filePath, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 =
+                    new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(fs);
+                fs.Close();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+
+                return sb.ToString();
+            }
+            catch (System.Exception ex)
+            {
+                throw new System.Exception("md5file() fail, error:" + ex.Message);
             }
         }
     }

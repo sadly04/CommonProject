@@ -67,6 +67,7 @@ namespace sdy.AssetBundleManager
             if (GUILayout.Button("浏览", GUILayout.MinWidth(60))) { OpenFolder(); }
             Path = EditorGUILayout.TextField(Path);
             EditorGUILayout.EndHorizontal();
+
             if (GUILayout.Button("修改该文件夹下的AssetName及Variant")) { SetSettings(); }
             if (GUILayout.Button("清除所有未被引用的AssetName及Variant"))
             {
