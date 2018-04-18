@@ -4,6 +4,14 @@ using UnityEngine;
 
 using System.IO;
 
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+
+
+#endif
+
 
 namespace sdy.AssetBundleManager
 {
@@ -67,6 +75,9 @@ namespace sdy.AssetBundleManager
             fullPath = System.IO.Path.Combine(Application.streamingAssetsPath,
                 System.IO.Path.Combine(WindowsDirectory, bundleLocalPath));
 
+            //GameObject obj = AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(fullPath);
+            //直接导入asset下的资源，模拟assetbundle加载资源
+            
 #endif
             return AssetBundle.LoadFromFile(fullPath);
 

@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainAB: {fileID: 0}
   Tex1: {fileID: 0}
+  Tex2: {fileID: 0}
 --- !u!1 &1944711510
 GameObject:
   m_ObjectHideFlags: 0

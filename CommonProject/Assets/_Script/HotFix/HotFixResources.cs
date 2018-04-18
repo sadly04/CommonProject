@@ -20,8 +20,8 @@ namespace sdy.HotFix
         private Dictionary<string, string> PersistentVersion;
         private Dictionary<string, string> ServerVersion;
 
-        private List<string> MissingFiles;
-        private List<string> NeedDownFiles;
+        public List<string> MissingFiles;
+        public List<string> NeedDownFiles;
 
         private bool NeedUpdateLocalVersionFile;
         private bool LoadPersistentVersionDone;
@@ -102,7 +102,8 @@ namespace sdy.HotFix
                 yield return null;
             }
 
-            StartCoroutine(DownLoad(SERVER_RES_URL, delegate (WWW serverVersion)
+
+            StartCoroutine(DownLoad(SERVER_RES_URL + VERSION_FILE, delegate (WWW serverVersion)
             {
                 ParseVersionFile(serverVersion.text, ServerVersion);
 
@@ -142,6 +143,8 @@ namespace sdy.HotFix
                 {
                     string fileName = version.Key;
                     string serverMd5 = version.Value;
+
+                    //Debug.Log(fileName + serverMd5);
                     //新增的资源    
                     if (!PersistentVersion.ContainsKey(fileName))
                     {
