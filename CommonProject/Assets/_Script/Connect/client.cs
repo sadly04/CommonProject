@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+/*
 public class client : MonoBehaviour
 {
     //要连接的服务器地址  
@@ -53,3 +53,4 @@ public class client : MonoBehaviour
 
     }
 }
+*/

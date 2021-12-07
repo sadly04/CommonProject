@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/*
 public class server : MonoBehaviour
 {
 
@@ -62,7 +62,6 @@ public class server : MonoBehaviour
     }
 
 
-    /* 系统提供的方法，该方法只执行一次 */
     // Use this for initialization   
     void Start()
     {
@@ -75,3 +74,4 @@ public class server : MonoBehaviour
 
     }
 }
+*/

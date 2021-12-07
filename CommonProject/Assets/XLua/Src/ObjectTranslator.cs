@@ -153,13 +153,13 @@ namespace XLua
 #if !GEN_CODE_MINIMIZE && !ENABLE_IL2CPP && (UNITY_EDITOR || XLUA_GENERAL) && !FORCE_REFLECTION
                 if (!DelegateBridge.Gen_Flag && !type.IsEnum() && !typeof(Delegate).IsAssignableFrom(type) && Utils.IsPublic(type))
                 {
-                    Type wrap = ce.EmitTypeWrap(type);
-                    MethodInfo method = wrap.GetMethod("__Register", BindingFlags.Static | BindingFlags.Public);
-                    method.Invoke(null, new object[] { L });
+                    // Type wrap = ce.EmitTypeWrap(type);
+                    // MethodInfo method = wrap.GetMethod("__Register", BindingFlags.Static | BindingFlags.Public);
+                    // method.Invoke(null, new object[] { L });
                 }
                 else
                 {
-                    Utils.ReflectionWrap(L, type);
+                    // Utils.ReflectionWrap(L, type);
                 }
 #else
                 Utils.ReflectionWrap(L, type);
@@ -332,14 +332,14 @@ namespace XLua
                               where !type.GetMethod("Invoke").GetParameters().Any(paramInfo => paramInfo.ParameterType.IsGenericParameter)
                                select type).GroupBy(t => t.GetMethod("Invoke"), new CompareByArgRet());
 
-                ce.SetGenInterfaces(cs_call_lua.Where(type=>type.IsInterface()).ToList());
-                delegate_birdge_type = ce.EmitDelegateImpl(groups);
+                //ce.SetGenInterfaces(cs_call_lua.Where(type=>type.IsInterface()).ToList());
+                //delegate_birdge_type = ce.EmitDelegateImpl(groups);
             }
 #endif
         }
 
 #if UNITY_EDITOR || XLUA_GENERAL
-        CodeEmit ce = new CodeEmit();
+        //CodeEmit ce = new CodeEmit();
 #endif
         Delegate getDelegate(DelegateBridgeBase bridge, Type delegateType)
         {
@@ -507,12 +507,12 @@ namespace XLua
             if (!interfaceBridgeCreators.TryGetValue(interfaceType, out creator))
             {
 #if UNITY_EDITOR || XLUA_GENERAL
-                var bridgeType = ce.EmitInterfaceImpl(interfaceType);
-                creator = (int reference, LuaEnv luaenv) =>
-                {
-                    return Activator.CreateInstance(bridgeType, new object[] { reference, luaEnv }) as LuaBase;
-                };
-                interfaceBridgeCreators.Add(interfaceType, creator);
+                // var bridgeType = ce.EmitInterfaceImpl(interfaceType);
+                // creator = (int reference, LuaEnv luaenv) =>
+                // {
+                //     return Activator.CreateInstance(bridgeType, new object[] { reference, luaEnv }) as LuaBase;
+                // };
+                // interfaceBridgeCreators.Add(interfaceType, creator);
 #else
                 throw new InvalidCastException("This type must add to CSharpCallLua: " + interfaceType);
 #endif
