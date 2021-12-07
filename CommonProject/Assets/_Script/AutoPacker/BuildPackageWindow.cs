@@ -3,6 +3,7 @@
 // Time: 2018/10/30 17:10:47
 // Description: 
 //=====================================================
+/*
 #if UNITY_EDITOR
 
 using System.Collections;
@@ -12,13 +13,13 @@ using UnityEditor;
 using System.IO;
 using SimpleFrame.Tool;
 
-//È·ÈÏ´°¿Ú, ¿ÉÓÃ¿ì½İ¼üÆô¶¯
+//ç¡®è®¤çª—å£, å¯ç”¨å¿«æ·é”®å¯åŠ¨
 public class BuildPackageWindow : EditorWindow
 {
     [MenuItem("MyTools/Package/Build Android Package #&amp;b")]
     public static void ShowPackageWindow()
     {
-        //µ¯³öÈ·ÈÏ´°¿Ú
+        //å¼¹å‡ºç¡®è®¤çª—å£
         EditorWindow.GetWindow(typeof(BuildPackageWindow), false, "Build Package Window");
     }
 
@@ -30,17 +31,17 @@ public class BuildPackageWindow : EditorWindow
 
     void OnEnable()
     {
-            //È·ÈÏĞÅÏ¢
+            //ç¡®è®¤ä¿¡æ¯
             showStr = "Package Info :";
             showStr += "\nCompany Name : " + PlayerSettings.companyName;
             showStr += "\nProduct Name : " + PlayerSettings.productName;
             showStr += "\nIdentifier : " + PlayerSettings.applicationIdentifier;
             showStr += "\nBundle Version : " + PlayerSettings.bundleVersion;
             showStr += "\nBundle Version Code : " + PlayerSettings.Android.bundleVersionCode;
-            //Í¼±êIocn
+            //å›¾æ ‡Iocn
             Texture2D[] texture2Ds = PlayerSettings.GetIconsForTargetGroup(BuildTargetGroup.Android);
             defaultIcon = texture2Ds.Length > 0 ? texture2Ds[0] : null;
-            //´ò°üÄ¬ÈÏÂ·¾¶¼°Ä¬ÈÏÎÄ¼şÃû
+            //æ‰“åŒ…é»˜è®¤è·¯å¾„åŠé»˜è®¤æ–‡ä»¶å
             apkPath = PlayerPrefs.GetString(buildPathPlayerPrefsStr);
             apkName = PlayerSettings.productName;
         }
@@ -58,7 +59,7 @@ public class BuildPackageWindow : EditorWindow
             apkName = EditorGUILayout.TextField("Package Name : ", apkName);
             if (string.IsNullOrEmpty(apkName))
                 EditorGUILayout.TextArea("Package Name Is Empty");
-            //µ÷ÓÃÏµÍ³´°¿Ú£¬Ñ¡Ôñ±£´æÂ·¾¶
+            //è°ƒç”¨ç³»ç»Ÿçª—å£ï¼Œé€‰æ‹©ä¿å­˜è·¯å¾„
             if (GUILayout.Button("Choose Path"))
             {
                 //EditorUtility.OpenFolderPanel("Choose Output Path", "", "");
@@ -97,3 +98,5 @@ defaultIcon = null;
     }
 
 #endif
+
+*/
