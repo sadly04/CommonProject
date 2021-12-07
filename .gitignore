@@ -20,3 +20,5 @@ obj/
 /CommonProject/CommonProject.sln
 /CommonProject/Assembly-CSharp.csproj
 /CommonProject/Assembly-CSharp-Editor.csproj
+/CommonProject/Unity.AssetBundleBrowser.Editor.csproj
+/CommonProject/Unity.AssetBundleBrowser.Editor.Tests.csproj
