@@ -16,3 +16,7 @@ obj/
 *.user
 *.unityproj
 *.booproj
+/CommonProject/.idea
+/CommonProject/CommonProject.sln
+/CommonProject/Assembly-CSharp.csproj
+/CommonProject/Assembly-CSharp-Editor.csproj
