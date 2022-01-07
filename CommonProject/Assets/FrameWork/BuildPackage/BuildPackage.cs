@@ -34,22 +34,24 @@ public class BuildPackage
             where sence.enabled
             select sence.path).ToArray();
 
+        var projectName = GenerateProjectName();
         var outputFile = string.Empty;
         switch (Target)
         {
             case BuildTarget.Android:
-                outputFile = Path.ChangeExtension(GenerateProjectName(), ".apk");
+                outputFile = Path.ChangeExtension(projectName, ".apk");
                 break;
             case BuildTarget.iOS:
                 outputFile = GenerateProjectName();
                 break;
             default:
-                outputFile = Path.ChangeExtension(GenerateProjectName(), ".exe");
+                outputFile = Path.ChangeExtension(projectName, ".exe");
                 break;
         }
         try
         {
-            var buildReport = BuildPipeline.BuildPlayer(levels, outputFile, Target, BuildOptions.None);
+            var outputPath = Path.Combine("BuildOutPut", Utils.GetBuildVersion(), outputFile);
+            var buildReport = BuildPipeline.BuildPlayer(levels, outputPath, Target, BuildOptions.None);
             var result = buildReport.summary.result;
             if (result != BuildResult.Succeeded)
             {
@@ -70,8 +72,8 @@ public class BuildPackage
     public static string GenerateProjectName()
     {
         var date = DateTime.Now.ToString("yyMMddhhmm");
-        var codeName = "Test";
-        var projectName = $"{codeName}_{Utils.GetBuildVersion()}_{Utils.GetAssetVersion()}_{date}";
+        var projName = PlayerSettings.productName;
+        var projectName = $"{projName}-{Utils.GetBuildVersion().Replace(".", "_")}-{Utils.GetAssetVersion().Replace(".", "_")}_{date}";
         return projectName;
     }
 }
