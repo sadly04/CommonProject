@@ -1,4 +1,0 @@
-local obj = CS.UnityEngine.GameObject.Find("Cube"):GetComponent("MeshRenderer").material
-CS.UnityEngine.GameObject.Find("Sphere"):GetComponent("MeshRenderer").material = obj
-
-
