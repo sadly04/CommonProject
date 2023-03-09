@@ -6,7 +6,7 @@ public class BuildPackageWindow : EditorWindow
    [MenuItem("Tools/BuildPackage/Windows")]
    public static void OpenBuildPackageWindow()
    {
-      BuildPackage.ExcuteBuild();
+      BuildPackage.ExecuteBuild();
    }
 }
 #endif

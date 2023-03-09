@@ -1,7 +1,7 @@
-﻿namespace FrameWork.Process
+﻿namespace FrameWork
 {
     interface IProcess
     {
-        void Excute();
+        void Execute();
     }
 }
