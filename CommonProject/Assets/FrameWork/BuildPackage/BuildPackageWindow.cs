@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class BuildPackageWindow : EditorWindow
 {
-   [MenuItem("Tools/BuildPackage/Windows")]
+   [MenuItem("Tools/BuildPackage")]
    public static void OpenBuildPackageWindow()
    {
       BuildPackage.ExecuteBuild();

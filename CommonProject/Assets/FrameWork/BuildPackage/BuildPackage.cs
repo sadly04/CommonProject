@@ -10,13 +10,7 @@ using UnityEditor.Build.Reporting;
 
 public class BuildPackage : IProcess
 {
-#if UNITY_ANDROID
-    public static BuildTarget Target = BuildTarget.Android;
-#elif UNITY_IOS
-    public static BuildTarget Target = BuildTarget.iOS;
-#else
-    public static BuildTarget Target = BuildTarget.StandaloneWindows;
-#endif
+    public static BuildTarget PackTarget = BuildTarget.Android;
 
     public void Execute()
     {
@@ -38,10 +32,16 @@ public class BuildPackage : IProcess
             where sence.enabled
             select sence.path).ToArray();
 
+        var target = PackTarget;
         var projectName = GeneratePackageName();
         var outputPath = Application.dataPath.Replace("Asset", "BuildOutPut");
+        if (!Directory.Exists(outputPath))
+        {
+            Directory.CreateDirectory(outputPath);
+        }
+
         var fileName = string.Empty;
-        switch (Target)
+        switch (target)
         {
             case BuildTarget.Android:
                 fileName = Path.ChangeExtension(projectName, ".apk");
@@ -59,21 +59,22 @@ public class BuildPackage : IProcess
             BuildPipeline.BuildPlayer(
                 levels,
                 outputFile,
-                Target,
+                target,
                 BuildOptions.None);
         
             Debug.Log("Build completed at " + outputFile);
         }
         catch (Exception e)
         {
-            Debug.LogError($"Build Finish With Exception : {e}");
+            Debug.LogError($"Build Package Finish With Exception : {e}");
+            Console.WriteLine(e);
             throw;
         }
     }
 
     public static string GeneratePackageName()
     {
-        var date = DateTime.Now.ToString("yyMMddhhmm");
+        var date = DateTime.Now.ToString("yy_MMdd_hhmm");
         var projName = PlayerSettings.productName;
         //var projectName = $"{projName}-{Utils.GetBuildVersion().Replace(".", "_")}-{Utils.GetAssetVersion().Replace(".", "_")}_{date}";
         var projectName = $"{projName}-{date}";

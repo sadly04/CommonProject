@@ -24,3 +24,5 @@ obj/
 /CommonProject/Unity.AssetBundleBrowser.Editor.Tests.csproj
 CommonProject/CommonProject.sln
 CommonProject/UserSettings/Layouts/default-2021.dwlt
+CommonProject/Assets/StreamingAssets/updata
+CommonProject/Assets/StreamingAssets/updata.meta

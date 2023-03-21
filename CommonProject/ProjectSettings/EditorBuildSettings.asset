@@ -5,6 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scene/SceneXLua.unity
-    guid: 663c698cedd8be44a8c3f6d7419d8937
+  - enabled: 1
+    path: Assets/Game/Data/Scene/Login.unity
+    guid: 0589378acc3984e1b99cebed8912408f
+  m_configObjects: {}
